@@ -8,7 +8,7 @@ const Login = () => {
     <Container>
       <Row>
         <Col md={5} className="login__bg">
-
+          {/* bg-image */}
         </Col>
 
         <Col md={7} className="d-flex flex-direction-column align-items-center justify-content-center">
@@ -29,7 +29,7 @@ const Login = () => {
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
           <Button variant="primary" type="submit">
-            Submit
+            Login
           </Button>
 
           <div className="py-4">
