@@ -1,0 +1,13 @@
+.home__bg {
+  background-image: url(https://left-nav.blogs.hopkinsmedicine.org/files/2016/11/connecting-people.jpg);
+  height: 92vh;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+}
+
+.home-message-icon {
+  margin-left: 10px;
+  display: inline-block;
+}
