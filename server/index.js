@@ -8,6 +8,8 @@ const PORT = 5001;
 app.use(express.json());
 app.use(cors());
 
+require('./connection');
+
 const io = require('socket.io')(server, {
   cors: {
     origin: 'http://localhost:3000',
