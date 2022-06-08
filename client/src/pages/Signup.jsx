@@ -12,18 +12,45 @@ const Signup = () => {
   
   // Image
   const [image, setImage] = useState(null);
-  const [uploading, setUploading] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
+  const [uploadingImg, setUploadingImg] = useState(false);
   
   function validateImg(e) {
     const file = e.target.files[0];
     setImage(file);
+    // URLを作成してくれる
     setImagePreview(URL.createObjectURL(file));
   }
+
+//cloudinaryへupload 
+  async function uploadImage() {
+    const data = new FormData();
+    data.append('file', image);
+    data.append('upload_preset', 'l6awljn3')
+    try{
+      setUploadingImg(true);
+      let res = await fetch("https://api.cloudinary.com/v1_1/dkovxib6o/image/upload", {
+        method: 'post',
+        body: data
+      })
+      const urlData = await res.json();
+      setUploadingImg(false);
+      return urlData.url;
+
+    }catch(err){
+      setUploadingImg(false);
+      console.log(err);
+    }
+  }
   
-  const handleSignup = (e) => {
+  async function handleSignup(e) {
     e.preventDefault();
-    
+    if(!image) return alert("Please select profile picture");
+    const url = await uploadImage(image);
+    console.log(url);
+
+    // signup user
+
   }
 
   return (
@@ -61,11 +88,8 @@ const Signup = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
         <Button variant="primary" type="submit">
-          Create account
+          {uploadingImg ? "Signing you up..." : "Signup"}
         </Button>
 
         <div className="py-4">
